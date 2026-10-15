@@ -22,6 +22,8 @@
   /* Black Week 2026 — uso exclusivo em elementos de campanha */
   --bw-red: #d91e2b;
   --bw-red-deep: #7f0e19;
+  --bw-red-hot: #f0303d;
+  --bw-red-glow: color-mix(in srgb, #d91e2b 45%, transparent);
   --text: #f7f7f7;
   --muted-text: #a9adb4;
   --subtle: #727b86;
@@ -65,6 +67,7 @@
   --color-orange-glow: var(--orange-glow);
   --color-bw-red: var(--bw-red);
   --color-bw-red-deep: var(--bw-red-deep);
+  --color-bw-red-hot: var(--bw-red-hot);
   --color-text: var(--text);
   --color-muted-text: var(--muted-text);
   --color-subtle: var(--subtle);

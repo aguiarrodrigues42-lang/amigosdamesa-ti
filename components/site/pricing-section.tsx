@@ -154,9 +154,9 @@ export function PricingSection() {
       <div className="container-desk flex flex-col gap-12">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
-            eyebrow={`Catálogo · ${plans.length} ofertas`}
-            title={<span id="planos-title">Escolha pelo critério, não pelo impulso.</span>}
-            lead="Contratos, meta, stop e preço lado a lado. Os valores abaixo são o preço-base atual do catálogo — preços Black Week só aparecem após aprovação."
+            eyebrow={`Ofertas Black Week · ${plans.length} planos`}
+            title={<span id="planos-title">Escolha seu plano Black Week.</span>}
+            lead="Compare contratos, meta, stop e preço lado a lado e garanta o plano ideal para sua operação."
           />
         </div>
 
@@ -281,9 +281,8 @@ export function PricingSection() {
         </div>
 
         <p className="max-w-3xl text-xs leading-relaxed text-subtle">
-          O valor de referência é o preço riscado da captura de origem e não representa total
-          parcelado. Pode haver cobrança de licença da plataforma Profit (referência: ONE R$ 115,00 ·
-          PRO R$ 245,00), sujeita a confirmação vigente.
+          Pode haver cobrança de licença da plataforma Profit (referência: ONE R$ 115,00 · PRO R$
+          245,00), sujeita a confirmação vigente. Consulte o regulamento antes de contratar.
         </p>
       </div>
 

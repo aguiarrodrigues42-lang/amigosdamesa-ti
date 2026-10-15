@@ -1,50 +1,98 @@
 'use client'
 
-import { AlertTriangle, Check, Plus } from 'lucide-react'
+import { ArrowUpRight, Check, Plus } from 'lucide-react'
 import type { CampaignStatus } from '@/config/campaign'
-import { getApprovedPromo } from '@/config/campaign'
 import type { Plan } from '@/data/types'
 import { formatBRL } from '@/lib/format'
+import { getCheckoutUrl, getPlanPricing } from '@/lib/pricing'
 import { cn } from '@/lib/utils'
 import { Term } from './term'
 
-export function PlanPrice({ plan, status, size = 'lg' }: { plan: Plan; status: CampaignStatus; size?: 'lg' | 'md' }) {
-  const promo = getApprovedPromo(plan.id, status)
-  if (plan.status === 'unavailable' || plan.baseOfferPriceCents == null) {
-    return (
-      <div className="flex flex-col gap-1">
-        <span className="eyebrow">Status</span>
-        <span className="display text-3xl text-subtle">Indisponível no momento</span>
-      </div>
-    )
-  }
-  const price = promo?.campaignPriceCents ?? plan.baseOfferPriceCents
+export function DiscountBadge({ percent, size = 'md' }: { percent: number; size?: 'sm' | 'md' }) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <span className="eyebrow">{promo ? 'Preço Black Week' : 'Preço-base do catálogo'}</span>
-      <div className="flex items-baseline gap-2">
+    <span className="flex flex-wrap items-center gap-2">
+      <span
+        className={cn(
+          'inline-flex items-center rounded-full bg-bw-red font-display font-bold uppercase leading-none tabular-nums text-text',
+          size === 'md' ? 'px-3 py-1.5 text-base' : 'px-2.5 py-1 text-sm',
+        )}
+      >
+        {`${percent}% OFF`}
+      </span>
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-text">
+        Black Week 2026
+      </span>
+    </span>
+  )
+}
+
+export function PlanPrice({
+  plan,
+  status,
+  size = 'lg',
+}: {
+  plan: Plan
+  status: CampaignStatus
+  size?: 'lg' | 'md'
+}) {
+  const { salePriceCents, discountPercent, monthly } = getPlanPricing(plan, status)
+  if (salePriceCents == null) {
+    return <span className="display text-3xl text-subtle">Indisponível</span>
+  }
+  return (
+    <div className="flex flex-col gap-3">
+      {discountPercent != null ? (
+        <DiscountBadge percent={discountPercent} size={size === 'lg' ? 'md' : 'sm'} />
+      ) : null}
+      <p className="flex items-baseline gap-1.5">
         <span
           className={cn(
-            'font-display font-bold tabular-nums tracking-tight text-text',
-            size === 'lg' ? 'text-[2.75rem] leading-none' : 'text-3xl leading-none',
+            'font-display font-bold leading-none tabular-nums tracking-tight text-text',
+            size === 'lg' ? 'text-[2.9rem]' : 'text-3xl',
           )}
         >
-          {formatBRL(price)}
+          {formatBRL(salePriceCents)}
         </span>
-        {plan.billing === 'monthly' ? <span className="text-sm text-muted-text">/mês</span> : null}
-      </div>
-      {plan.referencePriceCents != null ? (
-        <p className="text-xs text-subtle">
-          Valor de referência{' '}
-          <span className="tabular-nums line-through decoration-subtle">
-            {formatBRL(plan.referencePriceCents)}
-          </span>
-        </p>
-      ) : null}
-      {!promo ? (
-        <p className="text-xs text-subtle">Sujeito às condições da campanha quando aprovadas.</p>
-      ) : null}
+        {monthly ? <span className="text-base text-muted-text">/mês</span> : null}
+      </p>
     </div>
+  )
+}
+
+export function BuyButton({ plan, className }: { plan: Plan; className?: string }) {
+  const url = getCheckoutUrl(plan)
+  const base =
+    'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold uppercase tracking-[0.06em] transition-colors'
+  if (plan.status !== 'available') {
+    return (
+      <span aria-disabled="true" className={cn(base, 'border border-line-strong text-subtle', className)}>
+        Indisponível
+      </span>
+    )
+  }
+  if (!url) {
+    return (
+      <span
+        aria-disabled="true"
+        title="Link de compra em configuração"
+        className={cn(base, 'cursor-not-allowed bg-bw-red/45 text-text/70', className)}
+      >
+        Comprar agora
+        <span className="sr-only">{` — link de compra do ${plan.name} em configuração`}</span>
+      </span>
+    )
+  }
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(base, 'bg-bw-red text-text hover:bg-bw-red-hot', className)}
+    >
+      Comprar agora
+      <ArrowUpRight className="size-4" aria-hidden />
+      <span className="sr-only">{` o ${plan.name}`}</span>
+    </a>
   )
 }
 
@@ -66,6 +114,7 @@ export function PlanCard({
   const unavailable = plan.status === 'unavailable'
   const exclusive = plan.category === 'exclusive'
   const senior = plan.category === 'senior'
+  const extraNotes = plan.notes.length - 3
 
   return (
     <article
@@ -73,58 +122,49 @@ export function PlanCard({
       className={cn(
         'group relative flex h-full flex-col rounded-2xl border transition-all duration-200',
         exclusive ? 'silver-edge' : 'border-line bg-surface',
-        !unavailable && 'hover:-translate-y-0.5 hover:border-orange/50 hover:shadow-[0_18px_50px_-24px_var(--orange-glow)]',
+        !unavailable && 'hover:-translate-y-0.5 hover:border-bw-red/50 hover:shadow-[0_18px_50px_-24px_var(--bw-red-glow)]',
         unavailable && 'opacity-70',
         plan.featured && !exclusive && 'border-orange/40',
       )}
     >
-      <div className="flex flex-1 flex-col gap-6 p-6">
-        <div className="flex flex-wrap items-center gap-2">
-          {plan.featured ? (
-            <span className="rounded-full bg-orange px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-bg-deep">
-              Mais vendido
-            </span>
-          ) : null}
-          {exclusive ? (
-            <span className="rounded-full border border-silver/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-silver">
-              Edição limitada
-            </span>
-          ) : null}
-          {unavailable ? (
-            <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
-              Indisponível
-            </span>
-          ) : null}
-          {plan.billing === 'monthly' ? (
-            <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-text">
-              Mensal
-            </span>
-          ) : null}
-        </div>
+      <div className="flex flex-1 flex-col gap-5 p-6">
+        {plan.featured || exclusive || unavailable || plan.billing === 'monthly' ? (
+          <div className="flex flex-wrap items-center gap-2">
+            {plan.featured ? (
+              <span className="rounded-full bg-orange px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-bg-deep">
+                Mais vendido
+              </span>
+            ) : null}
+            {exclusive ? (
+              <span className="rounded-full border border-silver/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-silver">
+                Edição limitada
+              </span>
+            ) : null}
+            {unavailable ? (
+              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
+                Indisponível
+              </span>
+            ) : null}
+            {plan.billing === 'monthly' ? (
+              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-text">
+                Mensal
+              </span>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="flex items-end justify-between gap-4">
-          <h3
-            id={`plan-${plan.id}`}
-            className={cn('display text-[1.7rem]', exclusive && 'text-silver-metal')}
-          >
+          <h3 id={`plan-${plan.id}`} className={cn('display text-[1.7rem]', exclusive && 'text-silver-metal')}>
             {plan.name}
           </h3>
-          <div className="flex shrink-0 flex-col items-end">
-            {plan.contracts != null ? (
-              <>
-                <span className="font-display text-[2.4rem] font-bold leading-none tabular-nums text-orange">
-                  {plan.contracts}
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">
-                  contratos
-                </span>
-              </>
-            ) : (
-              <span className="rounded-md border border-dashed border-line-strong px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
-                Contratos a confirmar
+          {plan.contracts != null ? (
+            <p className="flex shrink-0 flex-col items-end">
+              <span className="font-display text-[2.4rem] font-bold leading-none tabular-nums text-orange">
+                {plan.contracts}
               </span>
-            )}
-          </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">contratos</span>
+            </p>
+          ) : null}
         </div>
 
         <dl className="flex flex-col text-sm">
@@ -136,7 +176,7 @@ export function PlanCard({
           ) : null}
           <div className="flex items-center justify-between gap-4 border-t border-line py-2.5">
             <dt className="text-muted-text">
-              <Term k="meta">Meta de aprovação</Term>
+              <Term k="meta">Meta</Term>
             </dt>
             <dd className="text-right font-mono tabular-nums text-text">
               {senior ? 'Não se aplica' : formatBRL(plan.metaCents)}
@@ -144,25 +184,23 @@ export function PlanCard({
           </div>
           <div className="flex items-center justify-between gap-4 border-y border-line py-2.5">
             <dt className="text-muted-text">
-              <Term k="stop">Stop Global</Term>
+              <Term k="stop">Stop global</Term>
             </dt>
             <dd className="font-mono tabular-nums text-text">{formatBRL(plan.stopGlobalCents)}</dd>
           </div>
           {plan.afterApprovalCents ? (
-            <div className="flex flex-col gap-1.5 border-b border-line py-2.5">
-              <dt className="text-muted-text">Taxa única após aprovação</dt>
-              <dd className="flex justify-between font-mono text-xs tabular-nums text-text">
-                <span>{`Profit ONE ${formatBRL(plan.afterApprovalCents.profitOne)}`}</span>
-                <span>{`PRO ${formatBRL(plan.afterApprovalCents.profitPro)}`}</span>
+            <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
+              <dt className="text-muted-text">Taxa após aprovação</dt>
+              <dd className="text-right font-mono text-xs tabular-nums text-text">
+                {`ONE ${formatBRL(plan.afterApprovalCents.profitOne)} · PRO ${formatBRL(plan.afterApprovalCents.profitPro)}`}
               </dd>
             </div>
           ) : null}
         </dl>
 
         {senior ? (
-          <p className="text-sm leading-relaxed text-muted-text">
-            Entrada direta no <Term k="sr">Simulador Remunerado</Term> para trader experiente,
-            segundo regras específicas.
+          <p className="text-sm text-muted-text">
+            Entrada direta no <Term k="sr">Simulador Remunerado</Term>.
           </p>
         ) : null}
 
@@ -174,45 +212,40 @@ export function PlanCard({
                 <span className="leading-snug">{n}</span>
               </li>
             ))}
-            {plan.notes.length > 3 ? (
-              <li className="pl-5 text-xs text-subtle">{`+${plan.notes.length - 3} condições no detalhe`}</li>
+            {extraNotes > 0 ? (
+              <li className="pl-5">
+                <button
+                  type="button"
+                  onClick={onOpen}
+                  className="text-xs text-muted-text underline decoration-line-strong underline-offset-4 hover:text-text"
+                >
+                  {`+${extraNotes} ${extraNotes === 1 ? 'benefício' : 'benefícios'}`}
+                </button>
+              </li>
             ) : null}
           </ul>
         ) : null}
 
-        {plan.reviewFlags.length > 0 ? (
-          <p className="flex items-start gap-2 rounded-lg border border-dashed border-orange/40 px-3 py-2 text-xs leading-relaxed text-orange">
-            <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            Pendente de validação comercial
-          </p>
-        ) : null}
-
         <div className="mt-auto flex flex-col gap-5 border-t border-line pt-5">
           <PlanPrice plan={plan} status={status} />
-          <div className="flex items-center gap-2">
+          <BuyButton plan={plan} className="w-full" />
+          <div className="flex items-center justify-between gap-3">
             <button
               type="button"
               onClick={onOpen}
-              className={cn(
-                'inline-flex h-11 flex-1 items-center justify-center rounded-full px-5 text-sm font-semibold transition-colors',
-                unavailable
-                  ? 'border border-line-strong text-muted-text hover:text-text'
-                  : 'bg-orange text-bg-deep hover:bg-orange-light',
-              )}
+              className="text-sm text-muted-text underline decoration-line-strong underline-offset-4 hover:text-text"
             >
-              Ver condições
+              Detalhes
               <span className="sr-only">{` do ${plan.name}`}</span>
             </button>
             <button
               type="button"
               onClick={onToggleCompare}
-            aria-disabled={compareDisabled && !compared ? true : undefined}
-            aria-pressed={compared}
-            className={cn(
-              'inline-flex h-11 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors aria-disabled:opacity-40',
-                compared
-                  ? 'border-orange text-orange'
-                  : 'border-line-strong text-muted-text hover:text-text',
+              aria-disabled={compareDisabled && !compared ? true : undefined}
+              aria-pressed={compared}
+              className={cn(
+                'inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors aria-disabled:opacity-40',
+                compared ? 'border-orange text-orange' : 'border-line-strong text-muted-text hover:text-text',
               )}
             >
               {compared ? <Check className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
@@ -220,9 +253,6 @@ export function PlanCard({
               <span className="sr-only">{` ${plan.name}`}</span>
             </button>
           </div>
-          <p className="text-[11px] leading-relaxed text-subtle">
-            Consulte custos de licença da plataforma e condições de repasse.
-          </p>
         </div>
       </div>
     </article>

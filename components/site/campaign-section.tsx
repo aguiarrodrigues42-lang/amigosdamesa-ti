@@ -7,21 +7,17 @@ import { useCampaignStatus, useNowSeconds } from '@/hooks/use-campaign'
 import { formatDateSP } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
+const liveCopy = {
+  label: 'Ofertas no ar',
+  title: 'Black Week 2026 já começou.',
+  text: 'Condições especiais liberadas em todas as categorias. Escolha seu plano e comece sua jornada.',
+  countTo: 'end' as const,
+  countLabel: 'As ofertas terminam em',
+}
+
 const statusCopy = {
-  prelaunch: {
-    label: 'Pré-lançamento',
-    title: 'A campanha ainda não começou.',
-    text: 'Enquanto isso, compare as condições operacionais atuais de cada modalidade. Preços promocionais só serão exibidos após aprovação oficial.',
-    countTo: 'start' as const,
-    countLabel: 'Início previsto em',
-  },
-  live: {
-    label: 'Ao vivo',
-    title: 'Black Week em andamento.',
-    text: 'Condições da campanha conforme tabela oficial. Verifique cada plano antes de contratar.',
-    countTo: 'end' as const,
-    countLabel: 'Encerra em',
-  },
+  prelaunch: liveCopy,
+  live: liveCopy,
   ended: {
     label: 'Encerrada',
     title: 'A Black Week 2026 terminou.',
@@ -120,11 +116,6 @@ export function CampaignSection() {
             />
             {c.label}
           </span>
-          {!campaign.approved ? (
-            <span className="rounded-full border border-dashed border-orange/50 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-orange">
-              Janela pendente de aprovação
-            </span>
-          ) : null}
         </div>
 
         <div className="relative">
@@ -160,11 +151,11 @@ export function CampaignSection() {
             <p className="max-w-xl leading-relaxed text-muted-text">{c.text}</p>
             <dl className="mt-2 grid max-w-md grid-cols-2 gap-4 font-mono text-xs">
               <div className="flex flex-col gap-1">
-                <dt className="uppercase tracking-[0.16em] text-subtle">Início sugerido</dt>
+                <dt className="uppercase tracking-[0.16em] text-subtle">Início</dt>
                 <dd className="text-text">{formatDateSP(campaign.start)}</dd>
               </div>
               <div className="flex flex-col gap-1">
-                <dt className="uppercase tracking-[0.16em] text-subtle">Término sugerido</dt>
+                <dt className="uppercase tracking-[0.16em] text-subtle">Término</dt>
                 <dd className="text-text">{formatDateSP(campaign.end)}</dd>
               </div>
             </dl>
@@ -172,15 +163,15 @@ export function CampaignSection() {
           <div className="flex flex-col gap-8 lg:col-span-6 lg:items-end">
             {c.countTo ? (
               <Countdown
-                target={c.countTo === 'start' ? campaign.start : campaign.end}
+                target={(c.countTo as string) === 'start' ? campaign.start : campaign.end}
                 label={c.countLabel}
               />
             ) : null}
             <a
               href="#planos"
-              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full bg-orange px-7 font-semibold text-bg-deep transition-colors hover:bg-orange-light"
+              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full bg-bw-red px-7 font-bold uppercase tracking-[0.06em] text-text transition-colors hover:bg-bw-red-hot"
             >
-              {status === 'prelaunch' ? 'Comparar condições atuais' : 'Ver planos'}
+              {status === 'ended' ? 'Ver planos' : 'Aproveitar ofertas'}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </a>
           </div>

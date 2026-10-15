@@ -7,22 +7,17 @@
  * Empate: mais contratos confirmados; persistindo, chave estável alfabética.
  * As justificativas usam apenas dados do catálogo.
  */
-import { getApprovedPromo, type CampaignStatus } from '@/config/campaign'
+import type { CampaignStatus } from '@/config/campaign'
 import type { Plan } from '@/data/types'
 import { formatBRL } from '@/lib/format'
+import { getPlanPricing } from '@/lib/pricing'
 
 /** Chave estável: categoria + nome (nomes como "UNO 40" se repetem entre categorias). */
 export const comparisonId = (p: Plan) => `${p.category}::${p.name}`
 export const isRecurringPlan = (p: Plan) => p.billing === 'monthly'
 
 export function displayedOfferPriceCents(plan: Plan, status: CampaignStatus): number | null {
-  if (plan.status !== 'available') return null
-  const promo = getApprovedPromo(plan.id, status)
-  if (promo && Number.isFinite(promo.campaignPriceCents) && promo.campaignPriceCents > 0) {
-    return promo.campaignPriceCents
-  }
-  const base = plan.baseOfferPriceCents
-  return typeof base === 'number' && Number.isFinite(base) && base > 0 ? base : null
+  return getPlanPricing(plan, status).salePriceCents
 }
 
 const sameNote = (a: string, b: string) =>

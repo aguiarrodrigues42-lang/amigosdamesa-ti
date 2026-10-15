@@ -1,24 +1,18 @@
 'use client'
 
 import { Fragment } from 'react'
-import { campaign } from '@/config/campaign'
 import { useCampaignStatus } from '@/hooks/use-campaign'
 
+const liveItems = [
+  'Black Week 2026',
+  'As ofertas já estão no ar',
+  'Condições especiais de novembro',
+  'Encontre seu plano na Amigos da Mesa',
+] as const
+
 const items = {
-  prelaunch: [
-    'Black Week 2026',
-    'Condições especiais de novembro',
-    'Amigos da Mesa PRO',
-    'O seu próximo passo no Day Trade',
-    'Chegando em novembro',
-  ],
-  live: [
-    'Black Week 2026',
-    'Condições especiais de novembro',
-    'Amigos da Mesa PRO',
-    'O seu próximo passo no Day Trade',
-    'Black Week liberada',
-  ],
+  prelaunch: liveItems,
+  live: liveItems,
   ended: ['Black Week 2026 encerrada', 'Amigos da Mesa PRO', 'Conheça os planos vigentes'],
 } as const
 
@@ -41,8 +35,7 @@ function Sequence({ list }: { list: readonly string[] }) {
 
 export function AnnouncementBar() {
   const status = useCampaignStatus()
-  const effective = status === 'live' && !campaign.approved ? 'prelaunch' : status
-  const list = items[effective]
+  const list = items[status]
 
   return (
     <div className="ribbon relative overflow-hidden border-b border-bw-red-deep bg-bw-red text-text">

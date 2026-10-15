@@ -6,8 +6,10 @@ import { categories } from '@/data/plans'
 import type { Plan } from '@/data/types'
 import { formatBRL } from '@/lib/format'
 import { comparisonId, displayedOfferPriceCents, recommendPremium } from '@/lib/premium'
+import { getPlanPricing } from '@/lib/pricing'
 import { cn } from '@/lib/utils'
 import { DeskDialog } from './desk-dialog'
+import { BuyButton, DiscountBadge } from './plan-card'
 
 type Row = { label: string; get: (p: Plan, s: CampaignStatus) => string }
 
@@ -25,14 +27,20 @@ const rows: Row[] = [
   },
   { label: 'Stop global', get: (p) => formatBRL(p.stopGlobalCents) },
   {
-    label: 'Preço exibido',
+    label: 'Preço Black Week',
     get: (p, s) => {
       const v = displayedOfferPriceCents(p, s)
       if (v == null) return 'Indisponível'
       return p.billing === 'monthly' ? `${formatBRL(v)}/mês` : formatBRL(v)
     },
   },
-  { label: 'Valor de referência', get: (p) => formatBRL(p.referencePriceCents) },
+  {
+    label: 'Desconto',
+    get: (p, s) => {
+      const d = getPlanPricing(p, s).discountPercent
+      return d != null ? `${d}% OFF` : '—'
+    },
+  },
   { label: 'Cobrança', get: (p) => (p.billing === 'monthly' ? 'Mensal (recorrente)' : 'Pagamento único') },
   {
     label: 'Taxa após aprovação',
@@ -54,11 +62,14 @@ const lower = (s: string) => s.toLocaleLowerCase('pt-BR')
 
 function PremiumSummary({
   rec,
+  status,
   onOpenPlan,
 }: {
   rec: NonNullable<ReturnType<typeof recommendPremium>>
+  status: CampaignStatus
   onOpenPlan: () => void
 }) {
+  const discount = getPlanPricing(rec.plan, status).discountPercent
   return (
     <section
       aria-labelledby="premium-title"
@@ -78,17 +89,18 @@ function PremiumSummary({
         <div className="flex shrink-0 flex-col gap-1 border-t border-line pt-4 md:min-w-56 md:border-l md:border-t-0 md:pl-6 md:pt-0">
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">Plano em destaque</span>
           <span className="display text-2xl">{rec.plan.name}</span>
-          <span className="font-mono text-lg tabular-nums text-text">
+          {discount != null ? <DiscountBadge percent={discount} size="sm" /> : null}
+          <span className="font-display text-3xl font-bold tabular-nums text-text">
             {formatBRL(rec.priceCents)}
-            {rec.plan.billing === 'monthly' ? <span className="text-sm text-muted-text">/mês</span> : null}
+            {rec.plan.billing === 'monthly' ? <span className="text-sm font-normal text-muted-text">/mês</span> : null}
           </span>
+          <BuyButton plan={rec.plan} className="mt-2 hidden md:inline-flex" />
           <button
             type="button"
             onClick={onOpenPlan}
-            className="mt-2 hidden h-11 items-center justify-center gap-2 rounded-full bg-bw-red px-5 text-sm font-semibold text-text transition-colors hover:bg-[#e8323e] md:inline-flex"
+            className="hidden text-sm text-muted-text underline underline-offset-4 hover:text-text md:inline"
           >
-            Ver condições
-            <ArrowRight className="size-4" aria-hidden />
+            Ver detalhes
           </button>
         </div>
       </div>
@@ -161,14 +173,17 @@ export function ComparePlans({
       footer={
         <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
           {rec ? (
-            <button
-              type="button"
-              onClick={() => onOpenPlan(rec.plan.id)}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-bw-red px-6 text-sm font-semibold text-text transition-colors hover:bg-[#e8323e]"
-            >
-              {`Ver condições do ${rec.plan.name}`}
-              <ArrowRight className="size-4" aria-hidden />
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => onOpenPlan(rec.plan.id)}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line-strong px-6 text-sm text-text transition-colors hover:border-text"
+              >
+                {`Ver detalhes do ${rec.plan.name}`}
+                <ArrowRight className="size-4" aria-hidden />
+              </button>
+              <BuyButton plan={rec.plan} />
+            </>
           ) : null}
           <button
             type="button"
@@ -190,7 +205,7 @@ export function ComparePlans({
       ) : (
         <div className="flex flex-col gap-6">
           {rec ? (
-            <PremiumSummary rec={rec} onOpenPlan={() => onOpenPlan(rec.plan.id)} />
+            <PremiumSummary rec={rec} status={status} onOpenPlan={() => onOpenPlan(rec.plan.id)} />
           ) : (
             <p className="rounded-xl border border-line p-4 text-sm text-muted-text">
               Nenhum plano selecionado está disponível para destaque no momento.
@@ -319,7 +334,6 @@ export function ComparePlans({
             </ul>
             <p className="text-xs leading-relaxed text-subtle">
               Pode haver cobrança de licença da plataforma Profit, sujeita a confirmação vigente.
-              Preços Black Week só aparecem após aprovação comercial.
             </p>
           </section>
         </div>

@@ -1,14 +1,14 @@
 'use client'
 
-import { AlertTriangle, ArrowUpRight, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import type { CampaignStatus } from '@/config/campaign'
 import { getApprovedPromo } from '@/config/campaign'
-import { links, planCheckoutUrls } from '@/data/links'
+import { links } from '@/data/links'
 import { categories } from '@/data/plans'
 import type { Plan } from '@/data/types'
 import { formatBRL } from '@/lib/format'
 import { DeskDialog } from './desk-dialog'
-import { PlanPrice } from './plan-card'
+import { BuyButton, PlanPrice } from './plan-card'
 import { Term } from './term'
 
 export function PlanDetailDrawer({
@@ -21,9 +21,7 @@ export function PlanDetailDrawer({
   onClose: () => void
 }) {
   const cat = plan ? categories.find((c) => c.slug === plan.category) : null
-  const checkout = plan ? planCheckoutUrls[plan.id] : undefined
   const promo = plan ? getApprovedPromo(plan.id, status) : null
-  const unavailable = plan?.status === 'unavailable'
 
   return (
     <DeskDialog
@@ -34,25 +32,7 @@ export function PlanDetailDrawer({
       footer={
         plan ? (
           <div className="flex flex-col gap-3">
-            {checkout && !unavailable ? (
-              <a
-                href={checkout}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 items-center justify-center gap-2 rounded-full bg-orange font-semibold text-bg-deep hover:bg-orange-light"
-              >
-                Seguir para checkout oficial
-                <ArrowUpRight className="size-4" aria-hidden />
-              </a>
-            ) : (
-              <button
-                type="button"
-                disabled
-                className="flex h-12 cursor-not-allowed items-center justify-center rounded-full border border-dashed border-line-strong text-sm text-subtle"
-              >
-                {unavailable ? 'Plano indisponível no momento' : 'Link oficial de checkout pendente'}
-              </button>
-            )}
+            <BuyButton plan={plan} className="w-full" />
             <a
               href={links.regulamento}
               target="_blank"
@@ -123,20 +103,6 @@ export function PlanDetailDrawer({
                     <Check className="mt-1 size-3.5 shrink-0 text-orange" aria-hidden />
                     {n}
                   </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          {plan.reviewFlags.length > 0 ? (
-            <div className="flex flex-col gap-2 rounded-xl border border-dashed border-orange/40 p-4">
-              <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-orange">
-                <AlertTriangle className="size-3.5" aria-hidden />
-                Pendências de validação
-              </h3>
-              <ul className="flex flex-col gap-1.5 text-sm text-muted-text">
-                {plan.reviewFlags.map((f) => (
-                  <li key={f}>{f}</li>
                 ))}
               </ul>
             </div>
