@@ -101,22 +101,6 @@ export function CampaignSection() {
       className="relative overflow-hidden border-t border-line bg-bg-deep py-24 lg:py-32"
     >
       <div ref={ref} className={cn('container-desk relative flex flex-col gap-14', visible && 'is-visible')}>
-        <div className="flex flex-wrap items-center gap-3">
-          <span
-            className={cn(
-              'inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em]',
-              status === 'live'
-                ? 'border-orange text-orange'
-                : 'border-line-strong text-muted-text',
-            )}
-          >
-            <span
-              className={cn('size-1.5 rounded-full', status === 'live' ? 'bg-orange' : 'bg-subtle')}
-              aria-hidden
-            />
-            {c.label}
-          </span>
-        </div>
 
         <div className="relative">
           <h2
