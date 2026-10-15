@@ -52,7 +52,7 @@ export function HeroBlackWeek() {
           <div className="anim-ctas flex flex-col gap-3 sm:flex-row">
             <a
               href="#planos"
-              className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-bw-red px-8 font-display text-lg font-bold uppercase tracking-[0.08em] text-text transition-colors hover:bg-bw-red-hot"
+              className="group inline-flex h-14 items-center justify-center gap-2 rounded-full btn-cta px-8 font-display text-lg font-bold uppercase tracking-[0.08em]"
             >
               {c.cta}
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />

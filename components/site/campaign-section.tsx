@@ -153,7 +153,7 @@ export function CampaignSection() {
             ) : null}
             <a
               href="#planos"
-              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full bg-bw-red px-7 font-bold uppercase tracking-[0.06em] text-text transition-colors hover:bg-bw-red-hot"
+              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full btn-cta px-7 font-bold uppercase tracking-[0.06em]"
             >
               {status === 'ended' ? 'Ver planos' : 'Aproveitar ofertas'}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />

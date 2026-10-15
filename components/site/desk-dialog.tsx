@@ -33,6 +33,7 @@ export function DeskDialog({
   className?: string
 }) {
   const ref = useRef<HTMLDialogElement>(null)
+  const bodyRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
 
   useEffect(() => {
@@ -41,13 +42,22 @@ export function DeskDialog({
     if (open && !el.open) el.showModal()
     if (!open && el.open) el.close()
     if (!open) return
+    if (bodyRef.current) bodyRef.current.scrollTop = 0
     const html = document.documentElement
-    const prev = html.style.overflow
+    const body = document.body
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
     html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
     return () => {
-      html.style.overflow = prev
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
     }
   }, [open])
+
+  useEffect(() => {
+    if (open && bodyRef.current) bodyRef.current.scrollTop = 0
+  }, [open, title])
 
   const mobileFull = variant === 'left' || variant === 'fullscreen'
 
@@ -60,7 +70,7 @@ export function DeskDialog({
         if (e.target === e.currentTarget) onClose()
       }}
       className={cn(
-        'z-[100] m-0 w-full max-w-none overscroll-contain border-line-strong bg-surface text-text open:flex open:flex-col',
+        'z-[100] m-0 w-full max-w-none overflow-hidden overscroll-contain border-line-strong bg-surface text-text open:flex open:flex-col',
         mobileFull
           ? 'max-md:inset-0 max-md:h-dvh max-md:max-h-dvh'
           : 'max-md:mt-auto max-md:max-h-[88dvh] max-md:rounded-t-2xl max-md:border-t',
@@ -89,7 +99,12 @@ export function DeskDialog({
           <X className="size-5" aria-hidden />
         </button>
       </header>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 md:px-6">{children}</div>
+      <div
+        ref={bodyRef}
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 [-webkit-overflow-scrolling:touch] md:px-6"
+      >
+        {children}
+      </div>
       {footer ? (
         <footer className="shrink-0 border-t border-line bg-surface px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-6">
           {footer}

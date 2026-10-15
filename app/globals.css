@@ -24,6 +24,10 @@
   --bw-red-deep: #7f0e19;
   --bw-red-hot: #f0303d;
   --bw-red-glow: color-mix(in srgb, #d91e2b 45%, transparent);
+  /* CTA principal: #E51C30 com branco = 5,8:1; hover #E71F35 = 4,56:1 (#FA2940 daria 3,85:1) */
+  --cta: #e51c30;
+  --cta-hot: #e71f35;
+  --cta-foreground: #ffffff;
   --text: #f7f7f7;
   --muted-text: #a9adb4;
   --subtle: #727b86;
@@ -127,6 +131,40 @@
 }
 
 @layer components {
+  .btn-cta {
+    background-color: var(--cta);
+    color: var(--cta-foreground);
+    font-weight: 700;
+    box-shadow: 0 8px 24px -12px color-mix(in srgb, var(--cta) 70%, transparent);
+    transition:
+      background-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 120ms ease,
+      filter 200ms ease;
+  }
+  @media (hover: hover) {
+    .btn-cta:hover {
+      background-color: var(--cta-hot);
+      filter: brightness(1.06);
+      box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--cta) 85%, transparent);
+    }
+  }
+  .btn-cta:active {
+    transform: scale(0.98);
+  }
+  .btn-cta:focus-visible {
+    outline: 2px solid var(--cta-foreground);
+    outline-offset: 3px;
+    border-radius: 9999px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-cta {
+      transition: none;
+    }
+    .btn-cta:active {
+      transform: none;
+    }
+  }
   .container-desk {
     @apply mx-auto w-full max-w-[1280px] px-5 md:px-8;
   }

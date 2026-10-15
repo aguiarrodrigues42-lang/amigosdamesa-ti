@@ -62,7 +62,7 @@ export function PlanPrice({
 export function BuyButton({ plan, className }: { plan: Plan; className?: string }) {
   const url = getCheckoutUrl(plan)
   const base =
-    'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold uppercase tracking-[0.06em] transition-colors'
+    'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold uppercase tracking-[0.06em]'
   if (plan.status !== 'available') {
     return (
       <span aria-disabled="true" className={cn(base, 'border border-line-strong text-subtle', className)}>
@@ -87,7 +87,7 @@ export function BuyButton({ plan, className }: { plan: Plan; className?: string 
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(base, 'bg-bw-red text-text hover:bg-bw-red-hot', className)}
+      className={cn(base, 'btn-cta', className)}
     >
       Comprar agora
       <ArrowUpRight className="size-4" aria-hidden />

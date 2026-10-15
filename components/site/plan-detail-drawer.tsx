@@ -29,6 +29,7 @@ export function PlanDetailDrawer({
       onClose={onClose}
       title={plan?.name ?? ''}
       description={cat ? `${cat.label} · ${cat.subtitle}` : undefined}
+      className="max-md:inset-0 max-md:mt-0 max-md:h-dvh max-md:max-h-dvh max-md:rounded-none max-md:border-t-0"
       footer={
         plan ? (
           <div className="flex flex-col gap-3">
