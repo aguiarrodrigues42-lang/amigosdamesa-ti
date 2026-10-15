@@ -206,10 +206,10 @@ export function PlanCard({
             <button
               type="button"
               onClick={onToggleCompare}
-              disabled={compareDisabled && !compared}
-              aria-pressed={compared}
-              className={cn(
-                'inline-flex h-11 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40',
+            aria-disabled={compareDisabled && !compared ? true : undefined}
+            aria-pressed={compared}
+            className={cn(
+              'inline-flex h-11 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors aria-disabled:opacity-40',
                 compared
                   ? 'border-orange text-orange'
                   : 'border-line-strong text-muted-text hover:text-text',

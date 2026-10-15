@@ -133,10 +133,16 @@ export function PricingSection() {
   const detailPlan = plans.find((p) => p.id === detailId) ?? null
   const comparedPlans = compare.map((id) => plans.find((p) => p.id === id)!).filter(Boolean)
 
-  const toggleCompare = (id: string) =>
-    setCompare((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < MAX_COMPARE ? [...prev, id] : prev,
-    )
+  const [limitMsg, setLimitMsg] = useState(false)
+  const toggleCompare = (id: string) => {
+    if (!compare.includes(id) && compare.length >= MAX_COMPARE) {
+      setLimitMsg(true)
+      window.setTimeout(() => setLimitMsg(false), 3200)
+      return
+    }
+    setLimitMsg(false)
+    setCompare((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
 
   const countFor = (slug: CategorySlug) => plans.filter((p) => p.category === slug).length
 
@@ -154,7 +160,7 @@ export function PricingSection() {
           />
         </div>
 
-        <div className="glass sticky top-16 z-30 -mx-5 flex flex-col gap-3 border-y border-line px-5 py-3 md:-mx-8 md:px-8">
+        <div className="glass sticky top-[68px] z-30 md:top-[72px] -mx-5 flex flex-col gap-3 border-y border-line px-5 py-3 md:-mx-8 md:px-8">
           <div role="tablist" aria-label="Categorias de planos" className="no-scrollbar -mx-1 flex gap-1 overflow-x-auto px-1">
             {categories.map((c) => {
               const selected = !q && c.slug === active
@@ -282,28 +288,41 @@ export function PricingSection() {
       </div>
 
       {compare.length > 0 ? (
-        <div className="fixed inset-x-0 bottom-4 z-40 flex justify-center px-4">
-          <div className="glass flex items-center gap-3 rounded-full border border-line-strong py-2 pl-5 pr-2 shadow-2xl">
-            <Columns3 className="size-4 text-orange" aria-hidden />
-            <span className="text-sm" aria-live="polite">
-              {`${compare.length} de ${MAX_COMPARE} selecionados`}
-            </span>
-            <button
-              type="button"
-              onClick={() => setCompare([])}
-              className="flex size-9 items-center justify-center rounded-full text-subtle hover:text-text"
-              aria-label="Limpar comparação"
-            >
-              <X className="size-4" aria-hidden />
-            </button>
-            <button
-              type="button"
-              onClick={() => setCompareOpen(true)}
-              disabled={compare.length < 2}
-              className="h-10 rounded-full bg-orange px-5 text-sm font-semibold text-bg-deep disabled:opacity-50"
-            >
-              Comparar
-            </button>
+        <div className="fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:px-4 md:pb-4">
+          <div className="glass flex w-full max-w-xl flex-col gap-2 rounded-2xl border border-line-strong p-2 pl-4 shadow-2xl">
+            <div className="flex items-center gap-3">
+              <Columns3 className="size-4 shrink-0 text-orange" aria-hidden />
+              <div className="flex min-w-0 flex-1 flex-col" aria-live="polite">
+                <span className="text-sm font-medium text-text">
+                  {`${compare.length} de ${MAX_COMPARE} selecionados`}
+                </span>
+                <span className="truncate text-xs text-muted-text">
+                  {limitMsg
+                    ? 'Você pode comparar até 3 planos por vez.'
+                    : compare.length < 2
+                      ? 'Selecione mais 1 plano para comparar.'
+                      : 'Pronto para comparar.'}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setCompare([])
+                  setLimitMsg(false)
+                }}
+                className="h-11 shrink-0 rounded-full px-3 text-sm text-muted-text hover:text-text"
+              >
+                Limpar
+              </button>
+              <button
+                type="button"
+                onClick={() => setCompareOpen(true)}
+                disabled={compare.length < 2}
+                className="h-11 shrink-0 rounded-full bg-text px-5 text-sm font-semibold text-bg-deep transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Comparar agora
+              </button>
+            </div>
           </div>
         </div>
       ) : null}
@@ -315,6 +334,10 @@ export function PricingSection() {
         plans={comparedPlans}
         status={status}
         onRemove={(id) => setCompare((prev) => prev.filter((x) => x !== id))}
+        onOpenPlan={(id) => {
+          setCompareOpen(false)
+          setDetailId(id)
+        }}
       />
       <DeskDialog
         open={filtersOpen}

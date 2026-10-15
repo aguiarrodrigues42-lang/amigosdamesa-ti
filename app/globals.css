@@ -10,17 +10,20 @@
  * Substituir pelo valor oficial do guia da marca quando disponível.
  */
 :root {
-  --bg: #050607;
-  --bg-deep: #020304;
-  --surface: #0d1013;
-  --surface-raised: #14181d;
+  --bg: #050506;
+  --bg-deep: #020203;
+  --surface: #101114;
+  --surface-raised: #16181c;
   --line: rgba(255, 255, 255, 0.1);
   --line-strong: rgba(255, 255, 255, 0.18);
   --orange: #ff681b;
   --orange-light: #ff9355;
   --orange-glow: rgba(255, 104, 27, 0.16);
-  --text: #f4f5f6;
-  --muted-text: #a4acb7;
+  /* Black Week 2026 — uso exclusivo em elementos de campanha */
+  --bw-red: #d91e2b;
+  --bw-red-deep: #7f0e19;
+  --text: #f7f7f7;
+  --muted-text: #a9adb4;
   --subtle: #727b86;
   --success: #20b66a;
   --silver: #c9ced6;
@@ -60,6 +63,8 @@
   --color-orange: var(--orange);
   --color-orange-light: var(--orange-light);
   --color-orange-glow: var(--orange-glow);
+  --color-bw-red: var(--bw-red);
+  --color-bw-red-deep: var(--bw-red-deep);
   --color-text: var(--text);
   --color-muted-text: var(--muted-text);
   --color-subtle: var(--subtle);
@@ -99,10 +104,11 @@
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
-    scroll-padding-top: 7.5rem;
+    scroll-padding-top: 5.5rem;
   }
   body {
     @apply bg-background text-foreground font-sans;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -215,6 +221,34 @@
 .ticker-track {
   animation: ticker 48s linear infinite;
 }
+.ribbon-track {
+  animation: ticker 28s linear infinite;
+  will-change: transform;
+}
+@media (hover: hover) {
+  .ribbon:hover .ribbon-track {
+    animation-play-state: paused;
+  }
+}
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text);
+}
+.hero-light {
+  background:
+    radial-gradient(60% 55% at 85% 0%, color-mix(in srgb, var(--bw-red-deep) 55%, transparent) 0%, transparent 70%),
+    radial-gradient(40% 40% at 0% 100%, color-mix(in srgb, var(--bw-red-deep) 22%, transparent) 0%, transparent 70%),
+    var(--bg);
+}
+.orderbook-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
 .draw-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -258,7 +292,8 @@ details > summary::-webkit-details-marker {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .ticker-track {
+  .ticker-track,
+  .ribbon-track {
     animation: none !important;
   }
   .draw-line {

@@ -8,6 +8,8 @@ import { DeskDialog } from './desk-dialog'
 import { Logo } from './logo'
 
 import { navItems } from '@/data/nav'
+import { campaign } from '@/config/campaign'
+import { useCampaignStatus } from '@/hooks/use-campaign'
 
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState<string | null>(null)
@@ -34,18 +36,20 @@ const ids = navItems.map((n) => n.id)
 export function MainHeader() {
   const active = useActiveSection(ids)
   const [menuOpen, setMenuOpen] = useState(false)
+  const status = useCampaignStatus()
+  const ctaLabel = status === 'live' && campaign.approved ? 'Ver ofertas Black Week' : 'Explorar planos'
 
   return (
-    <header className="glass sticky top-0 z-50 border-b border-line">
+    <header className="sticky top-0 z-50 border-b border-line bg-[rgba(6,7,9,0.88)] backdrop-blur-md">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-orange focus:px-3 focus:py-2 focus:text-bg-deep"
       >
         Pular para o conteúdo
       </a>
-      <div className="container-desk flex h-16 items-center justify-between gap-6">
+      <div className="container-desk flex h-[68px] items-center justify-between gap-6 md:h-[72px]">
         <a href="#topo" className="shrink-0" aria-label="Amigos da Mesa PRO — início">
-          <Logo priority />
+          <Logo priority className="h-9 w-auto md:h-10" />
         </a>
 
         <nav aria-label="Principal" className="hidden lg:block">
@@ -63,7 +67,7 @@ export function MainHeader() {
                   {item.label}
                   <span
                     className={cn(
-                      'absolute inset-x-4 -bottom-[13px] h-px bg-orange transition-opacity',
+                      'absolute inset-x-4 -bottom-[17px] h-0.5 bg-bw-red transition-opacity',
                       active === item.id ? 'opacity-100' : 'opacity-0',
                     )}
                     aria-hidden
@@ -79,21 +83,21 @@ export function MainHeader() {
             href={links.areaDoTrader}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 rounded-full border border-line-strong px-4 py-2 text-sm text-text transition-colors hover:border-orange sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-sm text-muted-text transition-colors hover:text-text xl:inline-flex"
           >
             Área do Trader
             <ArrowUpRight className="size-3.5" aria-hidden />
           </a>
           <a
             href="#planos"
-            className="hidden rounded-full bg-orange px-4 py-2 text-sm font-semibold text-bg-deep transition-colors hover:bg-orange-light md:inline-flex"
+            className="hidden h-11 items-center rounded-full bg-bw-red px-5 font-display text-base font-bold uppercase tracking-[0.08em] text-text transition-colors hover:bg-[#e8323e] md:inline-flex"
           >
-            Ver planos
+            {ctaLabel}
           </a>
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="flex size-10 items-center justify-center rounded-full border border-line-strong text-text lg:hidden"
+            className="flex size-11 items-center justify-center rounded-full border border-line-strong text-text lg:hidden"
             aria-label="Abrir menu"
             aria-haspopup="dialog"
           >
@@ -112,9 +116,9 @@ export function MainHeader() {
             <a
               href="#planos"
               onClick={() => setMenuOpen(false)}
-              className="flex h-12 items-center justify-center rounded-full bg-orange font-semibold text-bg-deep"
+              className="flex h-12 items-center justify-center rounded-full bg-bw-red font-display text-lg font-bold uppercase tracking-[0.08em] text-text"
             >
-              Ver planos
+              {ctaLabel}
             </a>
             <a
               href={links.areaDoTrader}
