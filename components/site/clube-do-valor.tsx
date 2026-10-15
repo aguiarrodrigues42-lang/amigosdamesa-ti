@@ -17,17 +17,12 @@ export function ClubeDoValor() {
         <div className="relative lg:col-span-6">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line">
             <Image
-              src="/images/sala-clube.png"
-              alt="Mesa de operação com múltiplos monitores em ambiente escuro"
+              src="/images/clube-do-valor.png"
+              alt="Clube do Valor: onde traders sérios operam ao lado de quem já vive do mercado. Sala ao vivo, Grupo VIP e mentoria em tempo real."
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent" />
-            <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-line-strong bg-bg-deep/70 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-text backdrop-blur">
-              <span className="size-1.5 rounded-full bg-orange" aria-hidden />
-              Sala ao vivo
-            </span>
           </div>
         </div>
         <div className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">

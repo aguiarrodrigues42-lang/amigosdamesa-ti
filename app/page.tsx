@@ -12,7 +12,6 @@ import { PricingSection } from '@/components/site/pricing-section'
 import { FinalCta, SiteFooter } from '@/components/site/site-footer'
 import { TestimonialsSection } from '@/components/site/testimonials-section'
 import { TraderJourney } from '@/components/site/trader-journey'
-import { TransparencySection } from '@/components/site/transparency-section'
 import { TrustMetrics } from '@/components/site/trust-metrics'
 
 export default function Page() {
@@ -32,7 +31,6 @@ export default function Page() {
         <ClubeDoValor />
         <ArenaSection />
         <TestimonialsSection />
-        <TransparencySection />
         <FaqSection />
         <FinalCta />
       </main>
