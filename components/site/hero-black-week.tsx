@@ -72,9 +72,7 @@ export function HeroBlackWeek() {
           <div className="anim-eyebrow flex flex-wrap items-center gap-x-4 gap-y-2">
             <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-text md:text-xs">
               <span className="h-4 w-0.5 bg-bw-red" aria-hidden />
-              Amigos da Mesa PRO apresenta
-              <span className="hidden text-subtle sm:inline">/</span>
-              <span className="hidden text-muted-text sm:inline">Novembro 2026</span>
+              Amigos da Mesa | BLACK WEEK
             </p>
           </div>
 
