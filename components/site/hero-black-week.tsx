@@ -87,9 +87,6 @@ export function HeroBlackWeek() {
                 <span className="display text-outline text-[clamp(4.25rem,19vw,10.5rem)] leading-[0.82]">
                   2026
                 </span>
-                <span className="mb-2 inline-flex items-center rounded-sm bg-bw-red px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-text md:mb-4 md:text-[11px]">
-                  {c.pill}
-                </span>
               </span>
             </span>
             <span className="display max-w-2xl text-balance text-[clamp(1.85rem,7.4vw,3.4rem)] leading-[0.98] text-text">
