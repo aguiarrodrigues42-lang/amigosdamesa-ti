@@ -39,9 +39,6 @@ export function HeroBlackWeek() {
               <span className="display text-[clamp(4.25rem,19vw,10.5rem)] leading-[0.82] text-text">
                 Black Week
               </span>
-              <span className="display text-outline text-[clamp(4.25rem,19vw,10.5rem)] leading-[0.82]">
-                2026
-              </span>
             </span>
             <span className="display max-w-2xl text-balance text-[clamp(1.85rem,6.6vw,3.2rem)] leading-[0.98] text-text">
               A hora de dar o próximo passo no Day Trade <span className="text-bw-red">é agora.</span>

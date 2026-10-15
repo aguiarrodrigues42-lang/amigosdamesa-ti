@@ -280,10 +280,7 @@ export function PricingSection() {
           ) : null}
         </div>
 
-        <p className="max-w-3xl text-xs leading-relaxed text-subtle">
-          Pode haver cobrança de licença da plataforma Profit (referência: ONE R$ 115,00 · PRO R$
-          245,00), sujeita a confirmação vigente. Consulte o regulamento antes de contratar.
-        </p>
+
       </div>
 
       {compare.length > 0 ? (
