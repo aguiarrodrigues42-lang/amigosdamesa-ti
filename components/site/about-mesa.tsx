@@ -23,7 +23,7 @@ export function AboutMesa() {
           <SectionHeading
             eyebrow="A mesa"
             title={<span id="sobre-title">Disciplina antes de capital.</span>}
-            lead="A Amigos da Mesa PRO é uma mesa proprietária de Day Trade: você demonstra consistência em ambiente simulado e, cumprindo as regras, pode avançar para fases elegíveis a repasse."
+            lead="A Amigos da Mesa é uma mesa proprietária de Day Trade. Estamos no mercado desde 2018. Unica mesa com repasses por quinzena!"
           />
         </div>
         <ul className="flex flex-col lg:col-span-5 lg:col-start-8 lg:pt-10">
