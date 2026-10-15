@@ -123,9 +123,6 @@ export function HeroBlackWeek() {
           </p>
         </div>
 
-        <div className="anim-support lg:col-span-5">
-          <MarketPanel status={c.panelStatus} />
-        </div>
       </div>
     </section>
   )
