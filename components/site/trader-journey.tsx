@@ -51,10 +51,7 @@ export function TraderJourney() {
             </li>
           ))}
         </ol>
-        <p className="max-w-3xl text-sm leading-relaxed text-subtle">
-          Repasses dependem de aprovação, modalidade, ciclo, resultado líquido elegível,
-          deduções e regras do regulamento. Não há garantia de aprovação nem de repasse.
-        </p>
+
       </div>
     </section>
   )
