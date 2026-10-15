@@ -1,0 +1,650 @@
+{
+  "source_date": "2026-10-15",
+  "source": "prints fornecidos pelo usuário + inspeção da landing page, valores vigentes sujeitos à confirmação",
+  "campaign": "Black Week 2026 - preços não definidos",
+  "categories": [
+    "Exames",
+    "Prime Plus",
+    "Titan",
+    "Exclusive",
+    "Sênior",
+    "Pegue e Monte",
+    "BIT"
+  ],
+  "plans": [
+    {
+      "category": "Exames",
+      "name": "Plano Iniciante",
+      "contracts": 7,
+      "meta": 800,
+      "stop_global": 2000,
+      "offer_price": 255.66,
+      "reference_price": 1331.4,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Exames",
+      "name": "Plano Intermediário",
+      "contracts": 15,
+      "meta": 1400,
+      "stop_global": 2500,
+      "offer_price": 334.7,
+      "reference_price": 1793.4,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "WIN / WDO",
+      "featured": true
+    },
+    {
+      "category": "Exames",
+      "name": "Plano Avançado",
+      "contracts": 25,
+      "meta": 3950,
+      "stop_global": 4250,
+      "offer_price": 535,
+      "reference_price": 2498.75,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Exames",
+      "name": "Plano UNO 40 · Índice",
+      "contracts": 40,
+      "meta": 4980,
+      "stop_global": 6250,
+      "offer_price": 999,
+      "reference_price": 2988.75,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "Índice",
+      "featured": false
+    },
+    {
+      "category": "Exames",
+      "name": "Plano UNO 40 · Dólar",
+      "contracts": 40,
+      "meta": 4980,
+      "stop_global": 6250,
+      "offer_price": 999,
+      "reference_price": 2988.75,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "Dólar",
+      "featured": false
+    },
+    {
+      "category": "Exames",
+      "name": "Plano Master",
+      "contracts": 50,
+      "meta": 9950,
+      "stop_global": 10250,
+      "offer_price": 1230,
+      "reference_price": 4747.23,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque"
+      ],
+      "after_approval": null,
+      "asset": "Índice e Dólar",
+      "featured": false
+    },
+    {
+      "category": "Prime Plus",
+      "name": "Prime Plus 6",
+      "contracts": 6,
+      "meta": 1800,
+      "stop_global": 2500,
+      "offer_price": 180,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem dias mínimos para aprovação",
+        "Sem stop diário"
+      ],
+      "after_approval": {
+        "Profit ONE": 300,
+        "Profit PRO": 350
+      },
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Prime Plus",
+      "name": "Prime Plus 11",
+      "contracts": 11,
+      "meta": 4000,
+      "stop_global": 3500,
+      "offer_price": 180,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem dias mínimos para aprovação",
+        "Sem stop diário"
+      ],
+      "after_approval": {
+        "Profit ONE": 720,
+        "Profit PRO": 780
+      },
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Prime Plus",
+      "name": "Prime Plus 16",
+      "contracts": 16,
+      "meta": 7500,
+      "stop_global": 6000,
+      "offer_price": 180,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem dias mínimos para aprovação",
+        "Sem stop diário"
+      ],
+      "after_approval": {
+        "Profit ONE": 1220,
+        "Profit PRO": 1320
+      },
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Prime Plus",
+      "name": "Prime Plus 21",
+      "contracts": 21,
+      "meta": 10000,
+      "stop_global": 9000,
+      "offer_price": 180,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem dias mínimos para aprovação",
+        "Sem stop diário"
+      ],
+      "after_approval": {
+        "Profit ONE": 1720,
+        "Profit PRO": 1850
+      },
+      "asset": "WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "Titan",
+      "name": "Titan Pro 10",
+      "contracts": 30,
+      "meta": 5000,
+      "stop_global": 5000,
+      "offer_price": 786.6,
+      "reference_price": 2622,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Titan",
+      "name": "Titan Pro 20",
+      "contracts": 45,
+      "meta": 8000,
+      "stop_global": 8000,
+      "offer_price": 1192.39,
+      "reference_price": 3974.63,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Titan",
+      "name": "Titan Pro 30",
+      "contracts": 65,
+      "meta": 14000,
+      "stop_global": 14000,
+      "offer_price": null,
+      "reference_price": 5308,
+      "status": "indisponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Titan",
+      "name": "Titan Pro 50",
+      "contracts": 80,
+      "meta": 10000,
+      "stop_global": 10000,
+      "offer_price": null,
+      "reference_price": 6641.33,
+      "status": "indisponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Exclusive",
+      "name": "Pegue e Monte 12 · Exclusive",
+      "contracts": 12,
+      "meta": 1920,
+      "stop_global": 3500,
+      "offer_price": 929.36,
+      "reference_price": 4646.8,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Edição limitada",
+        "Sem limite diário para o exame"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Exclusive",
+      "name": "Pegue e Monte 20 · Exclusive",
+      "contracts": 20,
+      "meta": 2832,
+      "stop_global": 4720,
+      "offer_price": 1320,
+      "reference_price": 6600,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Edição limitada",
+        "Sem limite diário para o exame"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "Iniciante 7",
+      "contracts": 7,
+      "meta": null,
+      "stop_global": 2000,
+      "offer_price": 637.66,
+      "reference_price": 5313.83,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "Intermediário 15",
+      "contracts": 15,
+      "meta": null,
+      "stop_global": 2500,
+      "offer_price": 799.22,
+      "reference_price": 6660.13,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "Avançado 25",
+      "contracts": 25,
+      "meta": null,
+      "stop_global": 4250,
+      "offer_price": 1199.02,
+      "reference_price": 5995.1,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "UNO 40 · Índice",
+      "contracts": 40,
+      "meta": null,
+      "stop_global": 6250,
+      "offer_price": 3419.64,
+      "reference_price": 7599.2,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "UNO 40 · Dólar",
+      "contracts": 40,
+      "meta": null,
+      "stop_global": 6250,
+      "offer_price": 3419.64,
+      "reference_price": 7599.2,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Sênior",
+      "name": "Master 50",
+      "contracts": 50,
+      "meta": null,
+      "stop_global": 10250,
+      "offer_price": 4183.98,
+      "reference_price": 9297.73,
+      "status": "disponivel",
+      "notes": [
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Direto no Simulador Remunerado",
+        "Entrada direta para trader experiente"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Pegue e Monte",
+      "name": "Pegue e Monte 8",
+      "contracts": 8,
+      "meta": 1500,
+      "stop_global": 2500,
+      "offer_price": 379.76,
+      "reference_price": 2373.42,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Pegue e Monte",
+      "name": "Pegue e Monte 12",
+      "contracts": 12,
+      "meta": 1920,
+      "stop_global": 3500,
+      "offer_price": 423.48,
+      "reference_price": 2646.8,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": true
+    },
+    {
+      "category": "Pegue e Monte",
+      "name": "Pegue e Monte 20",
+      "contracts": 20,
+      "meta": 2832,
+      "stop_global": 4720,
+      "offer_price": 720,
+      "reference_price": 3600,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Pegue e Monte",
+      "name": "Pegue e Monte 27",
+      "contracts": 27,
+      "meta": 3612,
+      "stop_global": 6020,
+      "offer_price": null,
+      "reference_price": 1690.5,
+      "status": "indisponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "Pegue e Monte",
+      "name": "Pegue e Monte 32",
+      "contracts": 32,
+      "meta": 4890,
+      "stop_global": 8150,
+      "offer_price": null,
+      "reference_price": 2120.6,
+      "status": "indisponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Sem limite diário para o exame",
+        "Sem mínimo de dias operados para aprovação"
+      ],
+      "after_approval": null,
+      "asset": null,
+      "featured": false
+    },
+    {
+      "category": "BIT",
+      "name": "BIT Ultra 10",
+      "contracts": null,
+      "meta": 900,
+      "stop_global": 1950,
+      "offer_price": 321.31,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Profit ONE"
+      ],
+      "after_approval": null,
+      "asset": "Bitcoin / WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "BIT",
+      "name": "BIT Ultra 15",
+      "contracts": null,
+      "meta": 2500,
+      "stop_global": 3510,
+      "offer_price": 460.86,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Profit ONE"
+      ],
+      "after_approval": null,
+      "asset": "Bitcoin / WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "BIT",
+      "name": "BIT Ultra 20",
+      "contracts": null,
+      "meta": 3500,
+      "stop_global": 5900,
+      "offer_price": 838.4,
+      "reference_price": null,
+      "status": "disponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Profit ONE"
+      ],
+      "after_approval": null,
+      "asset": "Bitcoin / WIN / WDO",
+      "featured": false
+    },
+    {
+      "category": "BIT",
+      "name": "BIT Ultra 30",
+      "contracts": null,
+      "meta": 5500,
+      "stop_global": 7150,
+      "offer_price": null,
+      "reference_price": null,
+      "status": "indisponivel",
+      "notes": [
+        "Meia meta",
+        "Ingresso Arena",
+        "90% saque",
+        "Sem take para ativar saque",
+        "Profit ONE"
+      ],
+      "after_approval": null,
+      "asset": "Bitcoin / WIN / WDO",
+      "featured": false
+    }
+  ]
+}
