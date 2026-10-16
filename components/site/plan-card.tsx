@@ -1,10 +1,19 @@
 'use client'
 
+import { useState } from 'react'
 import { ArrowUpRight, Check, Plus } from 'lucide-react'
 import type { CampaignStatus } from '@/config/campaign'
 import type { Plan } from '@/data/types'
 import { formatBRL } from '@/lib/format'
-import { getCheckoutUrl, getPlanPricing } from '@/lib/pricing'
+import {
+  DEFAULT_PLATFORM,
+  INSTALLMENTS,
+  getCheckoutUrl,
+  getPlanPlatformPricing,
+  getPlanPricing,
+  platformOptions,
+  type PlatformId,
+} from '@/lib/pricing'
 import { cn } from '@/lib/utils'
 import { Term } from './term'
 
@@ -59,8 +68,16 @@ export function PlanPrice({
   )
 }
 
-export function BuyButton({ plan, className }: { plan: Plan; className?: string }) {
-  const url = getCheckoutUrl(plan)
+export function BuyButton({
+  plan,
+  platform,
+  className,
+}: {
+  plan: Plan
+  platform?: PlatformId
+  className?: string
+}) {
+  const url = getCheckoutUrl(plan, platform)
   const base =
     'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold uppercase tracking-[0.06em]'
   if (plan.status !== 'available') {
@@ -96,6 +113,118 @@ export function BuyButton({ plan, className }: { plan: Plan; className?: string 
   )
 }
 
+function PlatformPicker({
+  planId,
+  value,
+  onChange,
+}: {
+  planId: string
+  value: PlatformId
+  onChange: (id: PlatformId) => void
+}) {
+  const labelId = `platform-${planId}`
+  return (
+    <div className="flex flex-col gap-3">
+      <p id={labelId} className="font-mono text-xs uppercase tracking-[0.2em] text-text">
+        Escolha sua plataforma
+      </p>
+      <div role="radiogroup" aria-labelledby={labelId} className="grid grid-cols-2 gap-2">
+        {platformOptions.map((opt) => {
+          const selected = opt.id === value
+          return (
+            <button
+              key={opt.id}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              onClick={() => onChange(opt.id)}
+              className={cn(
+                'relative flex min-h-16 flex-col items-start justify-center gap-1 rounded-xl border px-3 py-2.5 text-left transition-colors',
+                'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange',
+                selected
+                  ? 'border-orange bg-orange/10 shadow-[inset_0_0_0_1px_var(--orange)]'
+                  : 'border-line-strong bg-bg-deep/40 hover:border-muted-text',
+              )}
+            >
+              <span className="flex w-full items-center justify-between gap-2">
+                <span
+                  className={cn(
+                    'font-display text-sm font-bold uppercase leading-none tracking-[0.04em]',
+                    selected ? 'text-text' : 'text-muted-text',
+                  )}
+                >
+                  {opt.name}
+                </span>
+                <span
+                  aria-hidden
+                  className={cn(
+                    'flex size-4 shrink-0 items-center justify-center rounded-full border',
+                    selected ? 'border-orange bg-orange' : 'border-line-strong',
+                  )}
+                >
+                  {selected ? <Check className="size-3 text-bg-deep" strokeWidth={3} /> : null}
+                </span>
+              </span>
+              {opt.extraPriceCents === 0 ? (
+                <span className="flex flex-wrap items-baseline gap-1.5 text-xs">
+                  <s className="tabular-nums text-subtle">{formatBRL(opt.originalPlatformPriceCents)}</s>
+                  <span className="font-bold uppercase tracking-[0.06em] text-orange">Grátis</span>
+                </span>
+              ) : (
+                <span className="text-xs font-semibold tabular-nums text-muted-text">
+                  {`+ ${formatBRL(opt.extraPriceCents)}`}
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function PlatformPrice({
+  plan,
+  status,
+  platform,
+}: {
+  plan: Plan
+  status: CampaignStatus
+  platform: PlatformId
+}) {
+  const p = getPlanPlatformPricing(plan, status, platform)
+  if (p.finalPriceCents == null) {
+    return <span className="display text-3xl text-subtle">Indisponível</span>
+  }
+  const showOriginal =
+    p.discountPercent != null && p.originalDisplayPriceCents != null && p.originalDisplayPriceCents > p.finalPriceCents
+  return (
+    <div className="flex flex-col gap-1.5" aria-live="polite">
+      {showOriginal ? (
+        <p className="text-base text-subtle">
+          <span className="sr-only">De </span>
+          <s className="tabular-nums decoration-bw-red decoration-2">{formatBRL(p.originalDisplayPriceCents!)}</s>
+        </p>
+      ) : null}
+      <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-text">
+        {p.monthly ? 'Por mês' : 'À vista'}
+      </p>
+      <p className="flex items-baseline gap-1.5">
+        <span className="font-display text-[2.9rem] font-bold leading-none tabular-nums tracking-tight text-text">
+          {formatBRL(p.finalPriceCents)}
+        </span>
+        {p.monthly ? <span className="text-base text-muted-text">/mês</span> : null}
+      </p>
+      {p.installmentCents != null ? (
+        <p className="text-base text-muted-text">
+          {'ou '}
+          <span className="font-semibold tabular-nums text-text">{`${INSTALLMENTS}x de ${formatBRL(p.installmentCents)}`}</span>
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
 export function PlanCard({
   plan,
   status,
@@ -114,7 +243,9 @@ export function PlanCard({
   const unavailable = plan.status === 'unavailable'
   const exclusive = plan.category === 'exclusive'
   const senior = plan.category === 'senior'
-  const extraNotes = plan.notes.length - 3
+  const available = plan.status === 'available'
+  const [platform, setPlatform] = useState<PlatformId>(DEFAULT_PLATFORM)
+  const { discountPercent } = getPlanPricing(plan, status)
 
   return (
     <article
@@ -128,6 +259,7 @@ export function PlanCard({
       )}
     >
       <div className="flex flex-1 flex-col gap-5 p-6">
+        {discountPercent != null ? <DiscountBadge percent={discountPercent} /> : null}
         {plan.featured || exclusive || unavailable || plan.billing === 'monthly' ? (
           <div className="flex flex-wrap items-center gap-2">
             {plan.featured ? (
@@ -205,30 +337,27 @@ export function PlanCard({
         ) : null}
 
         {plan.notes.length > 0 ? (
-          <ul className="flex flex-col gap-2 text-sm">
-            {plan.notes.slice(0, 3).map((n) => (
-              <li key={n} className="flex items-start gap-2 text-muted-text">
-                <Check className="mt-0.5 size-3.5 shrink-0 text-orange" aria-hidden />
-                <span className="leading-snug">{n}</span>
-              </li>
-            ))}
-            {extraNotes > 0 ? (
-              <li className="pl-5">
-                <button
-                  type="button"
-                  onClick={onOpen}
-                  className="text-xs text-muted-text underline decoration-line-strong underline-offset-4 hover:text-text"
-                >
-                  {`+${extraNotes} ${extraNotes === 1 ? 'benefício' : 'benefícios'}`}
-                </button>
-              </li>
-            ) : null}
-          </ul>
+          <div className="flex flex-col gap-3">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-text">Benefícios inclusos</p>
+            <ul className="flex flex-col gap-2.5 text-[15px]">
+              {plan.notes.map((n) => (
+                <li key={n} className="flex items-start gap-2.5 text-text">
+                  <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-orange/15">
+                    <Check className="size-3 text-orange" strokeWidth={3} aria-hidden />
+                  </span>
+                  <span className="leading-snug">{n}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
 
         <div className="mt-auto flex flex-col gap-5 border-t border-line pt-5">
-          <PlanPrice plan={plan} status={status} />
-          <BuyButton plan={plan} className="w-full" />
+          {available ? (
+            <PlatformPicker planId={plan.id} value={platform} onChange={setPlatform} />
+          ) : null}
+          <PlatformPrice plan={plan} status={status} platform={platform} />
+          <BuyButton plan={plan} platform={platform} className="h-14 w-full text-base" />
           <div className="flex items-center justify-between gap-3">
             <button
               type="button"
