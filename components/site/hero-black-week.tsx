@@ -28,7 +28,7 @@ export function HeroBlackWeek() {
       <div className="container-desk relative grid gap-10 pb-16 pt-8 md:pt-14 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-24 lg:pt-16">
         <div className="flex flex-col gap-6 lg:col-span-7 lg:gap-7">
           <div className="anim-eyebrow flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-text md:text-xs">
+            <p className="flex items-center gap-3 font-display text-[11px] uppercase tracking-[0.06em] text-text md:text-xs">
               <span className="h-4 w-0.5 bg-bw-red" aria-hidden />
               Amigos da Mesa | BLACK WEEK
             </p>
@@ -52,14 +52,14 @@ export function HeroBlackWeek() {
           <div className="anim-ctas flex flex-col gap-3 sm:flex-row">
             <a
               href="#planos"
-              className="group inline-flex h-14 items-center justify-center gap-2 rounded-full btn-cta px-8 font-display text-lg font-bold uppercase tracking-[0.08em]"
+              className="group inline-flex h-14 items-center justify-center gap-2 rounded-full btn-cta px-8 font-display text-lg font-bold uppercase tracking-[0.02em]"
             >
               {c.cta}
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </a>
             <a
               href="#jornada"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-line-strong px-8 font-display text-lg font-bold uppercase tracking-[0.08em] text-text transition-colors hover:border-text"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-line-strong px-8 font-display text-lg font-bold uppercase tracking-[0.02em] text-text transition-colors hover:border-text"
             >
               Como funciona
               <ArrowDown className="size-5" aria-hidden />

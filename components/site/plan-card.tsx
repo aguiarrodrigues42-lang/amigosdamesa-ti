@@ -28,7 +28,7 @@ export function DiscountBadge({ percent, size = 'md' }: { percent: number; size?
       >
         {`${percent}% OFF`}
       </span>
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-text">
+      <span className="font-display text-xs font-semibold uppercase tracking-[0.06em] text-muted-text">
         Black Week 2026
       </span>
     </span>
@@ -56,8 +56,8 @@ export function PlanPrice({
       <p className="flex items-baseline gap-1.5">
         <span
           className={cn(
-            'font-display font-bold leading-none tabular-nums tracking-tight text-text',
-            size === 'lg' ? 'text-[2.9rem]' : 'text-3xl',
+            'font-display font-extrabold leading-none tabular-nums tracking-[-0.02em] text-text',
+            size === 'lg' ? 'text-[clamp(2rem,7vw,2.75rem)]' : 'text-3xl',
           )}
         >
           {formatBRL(salePriceCents)}
@@ -79,7 +79,7 @@ export function BuyButton({
 }) {
   const url = getCheckoutUrl(plan, platform)
   const base =
-    'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold uppercase tracking-[0.06em]'
+    'inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 font-display text-sm font-bold uppercase tracking-[0.02em]'
   if (plan.status !== 'available') {
     return (
       <span aria-disabled="true" className={cn(base, 'border border-line-strong text-subtle', className)}>
@@ -125,7 +125,7 @@ function PlatformPicker({
   const labelId = `platform-${planId}`
   return (
     <div className="flex flex-col gap-3">
-      <p id={labelId} className="font-mono text-xs uppercase tracking-[0.2em] text-text">
+      <p id={labelId} className="font-display text-[13px] font-semibold uppercase tracking-[0.04em] text-text">
         Escolha sua plataforma
       </p>
       <div role="radiogroup" aria-labelledby={labelId} className="grid grid-cols-2 gap-2">
@@ -149,7 +149,7 @@ function PlatformPicker({
               <span className="flex w-full items-center justify-between gap-2">
                 <span
                   className={cn(
-                    'font-display text-sm font-bold uppercase leading-none tracking-[0.04em]',
+                    'font-display text-sm font-semibold uppercase leading-none tracking-[0.01em]',
                     selected ? 'text-text' : 'text-muted-text',
                   )}
                 >
@@ -166,12 +166,12 @@ function PlatformPicker({
                 </span>
               </span>
               {opt.extraPriceCents === 0 ? (
-                <span className="flex flex-wrap items-baseline gap-1.5 text-xs">
+                <span className="flex flex-wrap items-baseline gap-1.5 font-display text-[13px] font-medium">
                   <s className="tabular-nums text-subtle">{formatBRL(opt.originalPlatformPriceCents)}</s>
-                  <span className="font-bold uppercase tracking-[0.06em] text-orange">Grátis</span>
+                  <span className="font-bold uppercase text-orange">Grátis</span>
                 </span>
               ) : (
-                <span className="text-xs font-semibold tabular-nums text-muted-text">
+                <span className="font-display text-[13px] font-semibold tabular-nums text-muted-text">
                   {`+ ${formatBRL(opt.extraPriceCents)}`}
                 </span>
               )}
@@ -201,22 +201,22 @@ function PlatformPrice({
   return (
     <div className="flex flex-col gap-1.5" aria-live="polite">
       {showOriginal ? (
-        <p className="text-base text-subtle">
+        <p className="font-display text-[15px] font-medium text-subtle">
           <span className="sr-only">De </span>
           <s className="tabular-nums decoration-bw-red decoration-2">{formatBRL(p.originalDisplayPriceCents!)}</s>
         </p>
       ) : null}
-      <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-text">
+      <p className="font-display text-[13px] font-medium uppercase tracking-[0.04em] text-muted-text">
         {p.monthly ? 'Por mês' : 'À vista'}
       </p>
       <p className="flex items-baseline gap-1.5">
-        <span className="font-display text-[2.9rem] font-bold leading-none tabular-nums tracking-tight text-text">
+        <span className="font-display text-[clamp(2rem,7vw,2.75rem)] font-extrabold leading-none tabular-nums tracking-[-0.02em] text-text">
           {formatBRL(p.finalPriceCents)}
         </span>
         {p.monthly ? <span className="text-base text-muted-text">/mês</span> : null}
       </p>
       {p.installmentCents != null ? (
-        <p className="text-base text-muted-text">
+        <p className="font-display text-[15px] font-medium text-muted-text">
           {'ou '}
           <span className="font-semibold tabular-nums text-text">{`${INSTALLMENTS}x de ${formatBRL(p.installmentCents)}`}</span>
         </p>
@@ -263,67 +263,67 @@ export function PlanCard({
         {plan.featured || exclusive || unavailable || plan.billing === 'monthly' ? (
           <div className="flex flex-wrap items-center gap-2">
             {plan.featured ? (
-              <span className="rounded-full bg-orange px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-bg-deep">
+              <span className="rounded-full bg-orange px-2.5 py-0.5 font-display text-xs font-medium uppercase tracking-[0.06em] text-bg-deep">
                 Mais vendido
               </span>
             ) : null}
             {exclusive ? (
-              <span className="rounded-full border border-silver/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-silver">
+              <span className="rounded-full border border-silver/40 px-2.5 py-0.5 font-display text-xs uppercase tracking-[0.06em] text-silver">
                 Edição limitada
               </span>
             ) : null}
             {unavailable ? (
-              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
+              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-display text-xs uppercase tracking-[0.06em] text-subtle">
                 Indisponível
               </span>
             ) : null}
             {plan.billing === 'monthly' ? (
-              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-text">
+              <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-display text-xs uppercase tracking-[0.06em] text-muted-text">
                 Mensal
               </span>
             ) : null}
           </div>
         ) : null}
 
-        <div className="flex items-end justify-between gap-4">
-          <h3 id={`plan-${plan.id}`} className={cn('display text-[1.7rem]', exclusive && 'text-silver-metal')}>
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+          <h3 id={`plan-${plan.id}`} className={cn('min-w-0 font-display text-[clamp(1.3rem,6.2vw,1.6rem)] font-semibold uppercase leading-tight tracking-[-0.01em] text-text', exclusive && 'text-silver-metal')}>
             {plan.name}
           </h3>
           {plan.contracts != null ? (
             <p className="flex shrink-0 flex-col items-end">
-              <span className="font-display text-[2.4rem] font-bold leading-none tabular-nums text-orange">
+              <span className="font-display text-[2.1rem] font-bold leading-none tabular-nums tracking-[-0.02em] text-orange">
                 {plan.contracts}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">contratos</span>
+              <span className="font-display text-xs font-medium uppercase tracking-[0.04em] text-subtle">contratos</span>
             </p>
           ) : null}
         </div>
 
-        <dl className="flex flex-col text-sm">
+        <dl className="flex flex-col text-[15px]">
           {plan.asset ? (
             <div className="flex items-center justify-between border-t border-line py-2.5">
-              <dt className="text-muted-text">Ativo</dt>
-              <dd className="font-mono text-text">{plan.asset}</dd>
+              <dt className="spec-label">Ativo</dt>
+              <dd className="spec-value">{plan.asset}</dd>
             </div>
           ) : null}
           <div className="flex items-center justify-between gap-4 border-t border-line py-2.5">
-            <dt className="text-muted-text">
+            <dt className="spec-label">
               <Term k="meta">Meta</Term>
             </dt>
-            <dd className="text-right font-mono tabular-nums text-text">
+            <dd className="spec-value text-right">
               {senior ? 'Não se aplica' : formatBRL(plan.metaCents)}
             </dd>
           </div>
           <div className="flex items-center justify-between gap-4 border-y border-line py-2.5">
-            <dt className="text-muted-text">
+            <dt className="spec-label">
               <Term k="stop">Stop global</Term>
             </dt>
-            <dd className="font-mono tabular-nums text-text">{formatBRL(plan.stopGlobalCents)}</dd>
+            <dd className="spec-value text-right">{formatBRL(plan.stopGlobalCents)}</dd>
           </div>
           {plan.afterApprovalCents ? (
             <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-              <dt className="text-muted-text">Taxa após aprovação</dt>
-              <dd className="text-right font-mono text-xs tabular-nums text-text">
+              <dt className="spec-label">Taxa após aprovação</dt>
+              <dd className="spec-value text-right text-[13px]">
                 {`ONE ${formatBRL(plan.afterApprovalCents.profitOne)} · PRO ${formatBRL(plan.afterApprovalCents.profitPro)}`}
               </dd>
             </div>
@@ -338,8 +338,8 @@ export function PlanCard({
 
         {plan.notes.length > 0 ? (
           <div className="flex flex-col gap-3">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-text">Benefícios inclusos</p>
-            <ul className="flex flex-col gap-2.5 text-[15px]">
+            <p className="font-display text-[13px] font-semibold uppercase tracking-[0.04em] text-muted-text">Benefícios inclusos</p>
+            <ul className="flex flex-col gap-2.5 text-[15px] font-medium">
               {plan.notes.map((n) => (
                 <li key={n} className="flex items-start gap-2.5 text-text">
                   <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-orange/15">
@@ -362,7 +362,7 @@ export function PlanCard({
             <button
               type="button"
               onClick={onOpen}
-              className="text-sm text-muted-text underline decoration-line-strong underline-offset-4 hover:text-text"
+              className="text-[15px] font-medium text-muted-text underline decoration-line-strong underline-offset-4 hover:text-text"
             >
               Detalhes
               <span className="sr-only">{` do ${plan.name}`}</span>
@@ -373,7 +373,7 @@ export function PlanCard({
               aria-disabled={compareDisabled && !compared ? true : undefined}
               aria-pressed={compared}
               className={cn(
-                'inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors aria-disabled:opacity-40',
+                'inline-flex h-10 items-center gap-1.5 rounded-full border px-4 text-sm font-semibold transition-colors aria-disabled:opacity-40',
                 compared ? 'border-orange text-orange' : 'border-line-strong text-muted-text hover:text-text',
               )}
             >

@@ -1,17 +1,18 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Barlow_Condensed, DM_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { DM_Sans, IBM_Plex_Mono, Montserrat } from 'next/font/google'
 import './globals.css'
 
-const barlow = Barlow_Condensed({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-barlow',
+  weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  variable: '--font-montserrat',
   display: 'swap',
 })
 const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-dm-sans',
   display: 'swap',
 })
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`bg-background ${barlow.variable} ${dmSans.variable} ${plexMono.variable}`}
+      className={`bg-background ${montserrat.variable} ${dmSans.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
         {children}

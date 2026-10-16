@@ -90,7 +90,7 @@ export function MainHeader() {
           </a>
           <a
             href="#planos"
-            className="hidden h-11 items-center rounded-full bg-bw-red px-5 font-display text-base font-bold uppercase tracking-[0.08em] text-text transition-colors hover:bg-[#e8323e] md:inline-flex"
+            className="hidden h-11 items-center rounded-full bg-bw-red px-5 font-display text-base font-bold uppercase tracking-[0.02em] text-text transition-colors hover:bg-[#e8323e] md:inline-flex"
           >
             {ctaLabel}
           </a>
@@ -116,7 +116,7 @@ export function MainHeader() {
             <a
               href="#planos"
               onClick={() => setMenuOpen(false)}
-              className="flex h-12 items-center justify-center rounded-full bg-bw-red font-display text-lg font-bold uppercase tracking-[0.08em] text-text"
+              className="flex h-12 items-center justify-center rounded-full bg-bw-red font-display text-lg font-bold uppercase tracking-[0.02em] text-text"
             >
               {ctaLabel}
             </a>
@@ -142,7 +142,7 @@ export function MainHeader() {
                   className="display flex items-center justify-between py-4 text-3xl"
                 >
                   {item.label}
-                  <span className="font-mono text-xs text-subtle">{`#${item.id}`}</span>
+                  <span className="font-display text-xs text-subtle">{`#${item.id}`}</span>
                 </a>
               </li>
             ))}

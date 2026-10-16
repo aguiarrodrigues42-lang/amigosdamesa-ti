@@ -13,7 +13,7 @@ export function ArenaSection() {
             title={<span id="arena-title">Competição com regras públicas.</span>}
             lead="Torneio de curta duração com ranking diário. A próxima edição será anunciada pelos canais oficiais."
           />
-          <span className="w-fit rounded-full border border-line-strong px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-text">
+          <span className="w-fit rounded-full border border-line-strong px-3 py-1 font-display text-[11px] uppercase tracking-[0.06em] text-muted-text">
             {nextEdition ? `Próxima: ${nextEdition.period}` : 'Próxima edição a anunciar'}
           </span>
         </div>
@@ -23,7 +23,7 @@ export function ArenaSection() {
             <div className="flex flex-col gap-6 bg-surface p-7 lg:col-span-5 lg:p-9">
               <div className="flex items-center justify-between">
                 <h3 className="display text-4xl">{last.title}</h3>
-                <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
+                <span className="rounded-full border border-line-strong px-2.5 py-0.5 font-display text-xs uppercase tracking-[0.06em] text-subtle">
                   Encerrada
                 </span>
               </div>
@@ -35,7 +35,7 @@ export function ArenaSection() {
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-4 border-t border-line py-2.5">
                     <dt className="text-muted-text">{k}</dt>
-                    <dd className="text-right font-mono text-text">{v}</dd>
+                    <dd className="text-right font-display text-text">{v}</dd>
                   </div>
                 ))}
               </dl>

@@ -74,7 +74,7 @@ export function PlanDetailDrawer({
             ].map(([k, v], i) => (
               <div key={i} className="flex flex-col gap-1 bg-surface p-4">
                 <dt className="text-xs text-muted-text">{k}</dt>
-                <dd className="font-mono tabular-nums text-text">{v}</dd>
+                <dd className="font-display tabular-nums text-text">{v}</dd>
               </div>
             ))}
           </dl>
@@ -85,11 +85,11 @@ export function PlanDetailDrawer({
               <ul className="flex flex-col text-sm">
                 <li className="flex justify-between border-t border-line py-2.5">
                   <span className="text-muted-text">Profit ONE</span>
-                  <span className="font-mono tabular-nums">{formatBRL(plan.afterApprovalCents.profitOne)}</span>
+                  <span className="font-display tabular-nums">{formatBRL(plan.afterApprovalCents.profitOne)}</span>
                 </li>
                 <li className="flex justify-between border-y border-line py-2.5">
                   <span className="text-muted-text">Profit PRO</span>
-                  <span className="font-mono tabular-nums">{formatBRL(plan.afterApprovalCents.profitPro)}</span>
+                  <span className="font-display tabular-nums">{formatBRL(plan.afterApprovalCents.profitPro)}</span>
                 </li>
               </ul>
             </div>

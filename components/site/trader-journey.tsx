@@ -39,7 +39,7 @@ export function TraderJourney() {
           {steps.map((s, i) => (
             <li key={s.code} className="relative flex flex-col gap-6 bg-surface p-7 lg:p-9">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">
+                <span className="font-display text-xs uppercase tracking-[0.06em] text-subtle">
                   {`Etapa ${i + 1} de 3`}
                 </span>
                 <span className="display text-5xl text-orange">{s.code}</span>

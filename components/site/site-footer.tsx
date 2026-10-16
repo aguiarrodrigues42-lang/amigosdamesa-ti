@@ -66,7 +66,7 @@ export function SiteFooter() {
         </ul>
       </div>
       <div className="border-t border-line">
-        <p className="container-desk py-5 font-mono text-[11px] text-subtle">
+        <p className="container-desk py-5 font-display text-[11px] text-subtle">
           {'© 2026 Amigos da Mesa PRO · Black Week 2026'}
         </p>
       </div>

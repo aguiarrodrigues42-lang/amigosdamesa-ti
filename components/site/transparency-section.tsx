@@ -28,7 +28,7 @@ export function TransparencySection() {
         <dl className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:col-span-8">
           {facts.map(([k, v]) => (
             <div key={k} className="flex flex-col gap-2 bg-surface p-6">
-              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-orange">{k}</dt>
+              <dt className="font-display text-[11px] uppercase tracking-[0.06em] text-orange">{k}</dt>
               <dd className="leading-relaxed text-muted-text">{v}</dd>
             </div>
           ))}

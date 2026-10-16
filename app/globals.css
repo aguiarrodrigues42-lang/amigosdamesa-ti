@@ -57,7 +57,7 @@
 
 @theme inline {
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow), 'Arial Narrow', sans-serif;
+  --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   --color-bg: var(--bg);
@@ -169,14 +169,20 @@
     @apply mx-auto w-full max-w-[1280px] px-5 md:px-8;
   }
   .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-muted-text md:text-xs;
+    @apply font-display text-xs font-semibold uppercase tracking-[0.08em] text-muted-text md:text-[13px];
   }
   .display {
-    @apply font-display font-bold uppercase leading-[0.92] tracking-[-0.01em];
+    @apply font-display font-bold uppercase leading-[1.05] tracking-[-0.02em];
   }
   .h2-desk {
-    @apply font-display font-bold uppercase leading-[0.92] tracking-[-0.01em] text-balance;
-    font-size: clamp(2.5rem, 4.6vw, 4.8rem);
+    @apply font-display font-bold uppercase leading-[1.1] tracking-[-0.02em] text-balance;
+    font-size: clamp(1.875rem, 4vw, 3.25rem);
+  }
+  .spec-label {
+    @apply font-display font-normal italic text-muted-text;
+  }
+  .spec-value {
+    @apply font-display font-semibold not-italic tabular-nums text-text;
   }
   .micrograd {
     background-image:

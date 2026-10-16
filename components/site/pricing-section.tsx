@@ -179,7 +179,7 @@ export function PricingSection() {
                   )}
                 >
                   {c.label}
-                  <span className={cn('font-mono text-[10px]', selected ? 'text-bg-deep/60' : 'text-subtle')}>
+                  <span className={cn('font-display text-xs', selected ? 'text-bg-deep/60' : 'text-subtle')}>
                     {countFor(c.slug)}
                   </span>
                 </button>
@@ -252,7 +252,7 @@ export function PricingSection() {
               </button>
             </div>
           ) : (
-            <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {visible.map((p) => (
                 <li key={p.id}>
                   <PlanCard

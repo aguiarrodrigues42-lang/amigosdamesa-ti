@@ -77,7 +77,7 @@ function PremiumSummary({
     >
       <div className="flex flex-col gap-4 p-5 md:flex-row md:items-start md:justify-between md:gap-8 md:p-6">
         <div className="flex min-w-0 flex-col gap-3">
-          <span className="inline-flex w-fit items-center gap-1.5 rounded-sm bg-bw-red px-2 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-text">
+          <span className="inline-flex w-fit items-center gap-1.5 rounded-sm bg-bw-red px-2 py-1 font-display text-xs font-medium uppercase tracking-[0.06em] text-text">
             <Crown className="size-3" aria-hidden />
             {rec.badge}
           </span>
@@ -87,7 +87,7 @@ function PremiumSummary({
           <p className="text-pretty text-sm leading-relaxed text-muted-text">{rec.subtext}</p>
         </div>
         <div className="flex shrink-0 flex-col gap-1 border-t border-line pt-4 md:min-w-56 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">Plano em destaque</span>
+          <span className="font-display text-xs uppercase tracking-[0.06em] text-subtle">Plano em destaque</span>
           <span className="display text-2xl">{rec.plan.name}</span>
           {discount != null ? <DiscountBadge percent={discount} size="sm" /> : null}
           <span className="font-display text-3xl font-bold tabular-nums text-text">
@@ -106,7 +106,7 @@ function PremiumSummary({
       </div>
       <div className="grid gap-4 border-t border-line p-5 md:grid-cols-2 md:p-6">
         <div className="flex flex-col gap-2">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">Por que este destaque</p>
+          <p className="font-display text-xs uppercase tracking-[0.06em] text-subtle">Por que este destaque</p>
           <ul className="flex flex-col gap-2">
             {rec.reasons.map((r) => (
               <li key={r} className="flex gap-2 text-sm leading-relaxed text-text">
@@ -117,7 +117,7 @@ function PremiumSummary({
           </ul>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">Antes de decidir</p>
+          <p className="font-display text-xs uppercase tracking-[0.06em] text-subtle">Antes de decidir</p>
           <ul className="flex flex-col gap-2">
             {rec.warnings.map((w) => (
               <li key={w} className="border-l border-line-strong pl-3 text-sm leading-relaxed text-muted-text">
@@ -164,7 +164,7 @@ export function ComparePlans({
       onClose={onClose}
       variant="fullscreen"
       eyebrow={
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-subtle">
+        <span className="font-display text-xs uppercase tracking-[0.06em] text-subtle">
           {`${plans.length} de 3 planos`}
         </span>
       }
@@ -220,7 +220,7 @@ export function ComparePlans({
                 gridCols[n],
               )}
             >
-              <span role="columnheader" className="sr-only md:not-sr-only md:self-end md:font-mono md:text-[10px] md:uppercase md:tracking-[0.18em] md:text-subtle">
+              <span role="columnheader" className="sr-only md:not-sr-only md:self-end md:font-display md:text-xs md:uppercase md:tracking-[0.06em] md:text-subtle">
                 Atributo
               </span>
               {plans.map((p) => (
@@ -244,7 +244,7 @@ export function ComparePlans({
                     </button>
                   </div>
                   {isPremium(p) ? (
-                    <span className="inline-flex w-fit items-center gap-1 rounded-sm bg-bw-red px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-text">
+                    <span className="inline-flex w-fit items-center gap-1 rounded-sm bg-bw-red px-1.5 py-0.5 font-display text-[11px] uppercase tracking-[0.06em] text-text">
                       <Crown className="size-2.5" aria-hidden />
                       Premium
                     </span>
@@ -260,7 +260,7 @@ export function ComparePlans({
                 <div key={r.label} role="row" className={cn('grid gap-x-2 gap-y-1.5 border-b border-line py-3 md:gap-x-4', gridCols[n])}>
                   <span
                     role="rowheader"
-                    className="col-span-full flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-subtle md:col-span-1 md:text-[11px]"
+                    className="col-span-full flex items-center gap-2 font-display text-xs uppercase tracking-[0.06em] text-subtle md:col-span-1 md:text-[11px]"
                   >
                     {r.label}
                     {differs ? (
@@ -275,7 +275,7 @@ export function ComparePlans({
                       key={p.id}
                       role="cell"
                       className={cn(
-                        'min-w-0 break-words rounded-md px-2.5 py-1.5 font-mono text-[13px] leading-snug tabular-nums md:text-sm',
+                        'min-w-0 break-words rounded-md px-2.5 py-1.5 font-display text-[13px] leading-snug tabular-nums md:text-sm',
                         isPremium(p) ? 'bg-bw-red/10 text-text' : 'text-text',
                         values[i] === 'Indisponível' && 'text-subtle',
                       )}
@@ -294,7 +294,7 @@ export function ComparePlans({
             </h3>
             {commonNotes.length ? (
               <div className="flex flex-col gap-2 rounded-xl border border-line p-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">Comum a todos</p>
+                <p className="font-display text-xs uppercase tracking-[0.06em] text-subtle">Comum a todos</p>
                 <ul className="flex flex-wrap gap-2">
                   {commonNotes.map((c) => (
                     <li key={c} className="rounded-full border border-line-strong px-3 py-1 text-xs text-muted-text">

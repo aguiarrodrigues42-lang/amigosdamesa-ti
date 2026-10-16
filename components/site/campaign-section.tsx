@@ -54,16 +54,16 @@ function Countdown({ target, label }: { target: string; label: string }) {
             key={unit as string}
             className="flex min-w-16 flex-col items-center rounded-lg border border-line bg-surface px-3 py-3 md:min-w-20"
           >
-            <span className="font-mono text-2xl tabular-nums text-text md:text-3xl">
+            <span className="font-display text-2xl tabular-nums text-text md:text-3xl">
               {v == null ? '--' : pad(v as number)}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">
+            <span className="font-display text-xs uppercase tracking-[0.06em] text-subtle">
               {unit}
             </span>
           </div>
         ))}
       </div>
-      <p className="font-mono text-[11px] text-subtle">Horário de Brasília (America/Sao_Paulo)</p>
+      <p className="font-display text-[11px] text-subtle">Horário de Brasília (America/Sao_Paulo)</p>
     </div>
   )
 }
@@ -133,13 +133,13 @@ export function CampaignSection() {
           <div className="flex flex-col gap-4 lg:col-span-6">
             <h3 className="display text-3xl md:text-4xl">{c.title}</h3>
             <p className="max-w-xl leading-relaxed text-muted-text">{c.text}</p>
-            <dl className="mt-2 grid max-w-md grid-cols-2 gap-4 font-mono text-xs">
+            <dl className="mt-2 grid max-w-md grid-cols-2 gap-4 font-display text-xs">
               <div className="flex flex-col gap-1">
-                <dt className="uppercase tracking-[0.16em] text-subtle">Início</dt>
+                <dt className="uppercase tracking-[0.06em] text-subtle">Início</dt>
                 <dd className="text-text">{formatDateSP(campaign.start)}</dd>
               </div>
               <div className="flex flex-col gap-1">
-                <dt className="uppercase tracking-[0.16em] text-subtle">Término</dt>
+                <dt className="uppercase tracking-[0.06em] text-subtle">Término</dt>
                 <dd className="text-text">{formatDateSP(campaign.end)}</dd>
               </div>
             </dl>
@@ -153,7 +153,7 @@ export function CampaignSection() {
             ) : null}
             <a
               href="#planos"
-              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full btn-cta px-7 font-bold uppercase tracking-[0.06em]"
+              className="group inline-flex h-13 items-center justify-center gap-2 rounded-full btn-cta px-7 font-bold uppercase tracking-[0.02em]"
             >
               {status === 'ended' ? 'Ver planos' : 'Aproveitar ofertas'}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
